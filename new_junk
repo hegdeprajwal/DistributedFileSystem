@@ -1,0 +1,2105 @@
+gcc -Wall -g -c server.c -o server.o
+gcc -Wall -g -c udp.c -o udp.o
+gcc  -o server server.o udp.o 
+gcc -Wall -g -c mfs.c -o mfs.o
+gcc -Wall -Werror -shared -fPIC -g -o libmfs.so mfs.c udp.c
+gcc -Wall -g -c client.c -o client.o
+gcc  -o client client.o udp.o 
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+('starting', 'build')
+
+**********************************************************************
+
+Test build
+build project using make
+
+**********************************************************************
+Trying to build project using make
+make
+gcc -Wall -Werror -shared -fPIC -g -o libmfs.so mfs.c udp.c
+
+
+test build PASSED
+ (build project using make)
+
+('starting', 'shutdown')
+
+**********************************************************************
+
+Test shutdown
+init server and client then call shutdown
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6825
+/tmp/tmpfQvLk6/p/server 6825 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(êO“•D)]
+calling UDP write
+
+
+test shutdown PASSED
+ (init server and client then call shutdown)
+
+('starting', 'creat')
+
+**********************************************************************
+
+Test creat
+creat a file and check with lookup
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9666
+/tmp/tmpfQvLk6/p/server 9666 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(êO“•D)]
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test creat PASSED
+ (creat a file and check with lookup)
+
+('starting', 'write')
+
+**********************************************************************
+
+Test write
+write then read one block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7418
+/tmp/tmpfQvLk6/p/server 7418 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 1)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 1)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+Image created
+calling UDP write
+calling UDP write
+('Look up complete ', 1)
+('Length of the buffer : ', 4096)
+Adding to check
+calling UDP write
+calling UDP write
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+calling UDP write
+
+
+test write PASSED
+ (write then read one block)
+
+('starting', 'stat')
+
+**********************************************************************
+
+Test stat
+stat a regular file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8039
+/tmp/tmpfQvLk6/p/server 8039 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 1)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+Adding to check
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test stat PASSED
+ (stat a regular file)
+
+('starting', 'overwrite')
+
+**********************************************************************
+
+Test overwrite
+overwrite a block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9371
+/tmp/tmpfQvLk6/p/server 9371 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 1)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 2)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+Adding to check
+calling UDP write
+calling UDP write
+Adding to check
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test overwrite PASSED
+ (overwrite a block)
+
+('starting', 'maxfile')
+
+**********************************************************************
+
+Test maxfile
+write largest possible file
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8509
+/tmp/tmpfQvLk6/p/server 8509 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 0)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 1)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 2)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 3)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 4)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 5)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 6)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 7)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 8)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 9)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 10)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 11)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 12)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 13)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 14)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 15)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 16)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 17)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 18)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 19)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 20)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 21)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 22)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 23)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 24)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 25)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 26)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 27)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 28)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 29)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+('max file : ', 1, 30, 4096)
+<mfs.c_char_Array_4096 object at 0x560a00c0f710>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0f7a0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0f830>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0f8c0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0f950>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0f9e0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fa70>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fb00>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fb90>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fc20>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fcb0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fd40>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fdd0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fe60>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0fef0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c0ff80>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34050>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c340e0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34170>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34200>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34290>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34320>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c343b0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34440>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c344d0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34560>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c345f0>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34680>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c34710>
+Adding to check
+calling UDP write
+<mfs.c_char_Array_4096 object at 0x560a00c347a0>
+Adding to check
+calling UDP write
+passed write stage
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test maxfile PASSED
+ (write largest possible file)
+
+('starting', 'maxfile2')
+
+**********************************************************************
+
+Test maxfile2
+write more blocks than possible
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7987
+/tmp/tmpfQvLk6/p/server 7987 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 0)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 1)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 2)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 3)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 4)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 5)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 6)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 7)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 8)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 9)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 10)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 11)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 12)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 13)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 14)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 15)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 16)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 17)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 18)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 19)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 20)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 21)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 22)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 23)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 24)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 25)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 26)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 27)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 28)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 29)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 30)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 30)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+31
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+Adding to check
+calling UDP write
+write more than need
+Adding to check
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test maxfile2 PASSED
+ (write more blocks than possible)
+
+('starting', 'dir1')
+
+**********************************************************************
+
+Test dir1
+check root for dot entries
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7788
+/tmp/tmpfQvLk6/p/server 7788 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(êO“•D)]
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test dir1 PASSED
+ (check root for dot entries)
+
+('starting', 'dir2')
+
+**********************************************************************
+
+Test dir2
+create a new directory and check it
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5115
+/tmp/tmpfQvLk6/p/server 5115 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(êO“•D)]
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test dir2 PASSED
+ (create a new directory and check it)
+
+('starting', 'baddir')
+
+**********************************************************************
+
+Test baddir
+try to create a file with a file parent inode
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5118
+/tmp/tmpfQvLk6/p/server 5118 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+return error because the parent should be a dir: Success
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:( )]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(êO“•D)]
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test baddir PASSED
+ (try to create a file with a file parent inode)
+
+('starting', 'baddir2')
+
+**********************************************************************
+
+Test baddir2
+try to lookup a file with a file parent inode
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5729
+/tmp/tmpfQvLk6/p/server 5729 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test baddir2 PASSED
+ (try to lookup a file with a file parent inode)
+
+('starting', 'unlink')
+
+**********************************************************************
+
+Test unlink
+unlink a file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5395
+/tmp/tmpfQvLk6/p/server 5395 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+('Inum returned = ', -1)
+calling UDP write
+
+
+test unlink PASSED
+ (unlink a file)
+
+('starting', 'unlink2')
+
+**********************************************************************
+
+Test unlink2
+unlink a directory
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5806
+/tmp/tmpfQvLk6/p/server 5806 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test unlink2 PASSED
+ (unlink a directory)
+
+('starting', 'empty')
+
+**********************************************************************
+
+Test empty
+unlink a non-empty directory
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9397
+/tmp/tmpfQvLk6/p/server 9397 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(Ä)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(Ä)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+('returned entry = ', -1)
+Passed part 1 
+calling UDP write
+Passed part 2 
+calling UDP write
+Passed part 3 
+calling UDP write
+
+
+test empty PASSED
+ (unlink a non-empty directory)
+
+('starting', 'name')
+
+**********************************************************************
+
+Test name
+name too long
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5766
+/tmp/tmpfQvLk6/p/server 5766 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(êO“•D)]
+calling UDP write
+
+
+test name PASSED
+ (name too long)
+
+('starting', 'persist')
+
+**********************************************************************
+
+Test persist
+restart server after creating a file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9466
+/tmp/tmpfQvLk6/p/server 9466 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(START BLOCK 1)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+Adding to check
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+Starting server on port 9466
+/tmp/tmpfQvLk6/p/server 9466 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:()]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:()]
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test persist PASSED
+ (restart server after creating a file)
+
+('starting', 'bigdir')
+
+**********************************************************************
+
+Test bigdir
+create a directory with 126 files
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7769
+/tmp/tmpfQvLk6/p/server 7769 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inumcalling UDP write
+calling UDP write
+(1, '0')
+calling UDP write
+(1, '1')
+calling UDP write
+(1, '2')
+calling UDP write
+(1, '3')
+calling UDP write
+(1, '4')
+calling UDP write
+(1, '5')
+calling UDP write
+(1, '6')
+calling UDP write
+(1, '7')
+calling UDP write
+(1, '8')
+calling UDP write
+(1, '9')
+calling UDP write
+(1, '10')
+calling UDP write
+(1, '11')
+calling UDP write
+(1, '12')
+calling UDP write
+(1, '13')
+calling UDP write
+(1, '14')
+calling UDP write
+(1, '15')
+calling UDP write
+(1, '16')
+calling UDP write
+(1, '17')
+calling UDP write
+(1, '18')
+calling UDP write
+(1, '19')
+calling UDP write
+(1, '20')
+calling UDP write
+(1, '21')
+calling UDP write
+(1, '22')
+calling UDP write
+(1, '23')
+calling UDP write
+(1, '24')
+calling UDP write
+(1, '25')
+calling UDP write
+(1, '26')
+calling UDP write
+(1, '27')
+calling UDP write
+(1, '28')
+calling UDP write
+(1, '29')
+calling UDP write
+(1, '30')
+calling UDP write
+(1, '31')
+calling UDP write
+(1, '32')
+calling UDP write
+(1, '33')
+calling UDP write
+(1, '34')
+calling UDP write
+(1, '35')
+calling UDP write
+(1, '36')
+calling UDP write
+(1, '37')
+calling UDP write
+(1, '38')
+calling UDP write
+(1, '39')
+calling UDP write
+(1, '40')
+calling UDP write
+(1, '41')
+calling UDP write
+(1, '42')
+calling UDP write
+(1, '43')
+calling UDP write
+(1, '44')
+calling UDP write
+(1, '45')
+calling UDP write
+(1, '46')
+calling UDP write
+(1, '47')
+calling UDP write
+(1, '48')
+calling UDP write
+(1, '49')
+calling UDP write
+(1, '50')
+calling UDP write
+(1, '51')
+calling UDP write
+(1, '52')
+calling UDP write
+(1, '53')
+calling UDP write
+(1, '54')
+calling UDP write
+(1, '55')
+calling UDP write
+(1, '56')
+calling UDP write
+(1, '57')
+calling UDP write
+(1, '58')
+calling UDP write
+(1, '59')
+calling UDP write
+(1, '60')
+calling UDP write
+(1, '61')
+calling UDP write
+(1, '62')
+calling UDP write
+(1, '63')
+calling UDP write
+(1, '64')
+calling UDP write
+(1, '65')
+calling UDP write
+(1, '66')
+calling UDP write
+(1, '67')
+calling UDP write
+(1, '68')
+calling UDP write
+(1, '69')
+calling UDP write
+(1, '70')
+calling UDP write
+(1, '71')
+calling UDP write
+(1, '72')
+calling UDP write
+(1, '73')
+calling UDP write
+(1, '74')
+calling UDP write
+(1, '75')
+calling UDP write
+(1, '76')
+calling UDP write
+(1, '77')
+calling UDP write
+(1, '78')
+calling UDP write
+(1, '79')
+calling UDP write
+(1, '80')
+calling UDP write
+(1, '81')
+calling UDP write
+(1, '82')
+calling UDP write
+(1, '83')
+calling UDP write
+(1, '84')
+calling UDP write
+(1, '85')
+calling UDP write
+(1, '86')
+calling UDP write
+(1, '87')
+calling UDP write
+(1, '88')
+calling UDP write
+(1, '89')
+calling UDP write
+(1, '90')
+calling UDP write
+(1, '91')
+calling UDP write
+(1, '92')
+calling UDP write
+(1, '93')
+calling UDP write
+(1, '94')
+calling UDP write
+(1, '95')
+calling UDP write
+(1, '96')
+calling UDP write
+(1, '97')
+calling UDP write
+(1, '98')
+calling UDP write
+(1, '99')
+calling UDP write
+(1, '100')
+calling UDP write
+(1, '101')
+calling UDP write
+(1, '102')
+calling UDP write
+(1, '103')
+calling UDP write
+(1, '104')
+calling UDP write
+(1, '105')
+calling UDP write
+(1, '106')
+calling UDP write
+(1, '107')
+calling UDP write
+(1, '108')
+calling UDP write
+(1, '109')
+calling UDP write
+(1, '110')
+calling UDP write
+(1, '111')
+calling UDP write
+(1, '112')
+calling UDP write
+(1, '113')
+calling UDP write
+(1, '114')
+calling UDP write
+(1, '115')
+calling UDP write
+(1, '116')
+calling UDP write
+(1, '117')
+calling UDP write
+(1, '118')
+calling UDP write
+(1, '119')
+calling UDP write
+(1, '120')
+calling UDP write
+(1, '121')
+calling UDP write
+(1, '122')
+calling UDP write
+(1, '123')
+calling UDP write
+(1, '124')
+calling UDP write
+(1, '125')
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP :1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(êO“•D)]
+write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test bigdir PASSED
+ (create a directory with 126 files)
+
+('starting', 'deep')
+
+**********************************************************************
+
+Test deep
+create many deeply nested directories
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6708
+/tmp/tmpfQvLk6/p/server 6708 /home/hegde/OS_Project/p4/Distributed_FS/test.img
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(@G”•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(@G”•testdir)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:2, content:(@G”•0)]
+server:: waiting...
+server:: read message [size:4156, inum:2, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:3, content:(@G”•1)]
+server:: waiting...
+server:: read message [size:4156, inum:3, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:4, content:(@G”•2)]
+server:: waiting...
+server:: read message [size:4156, inum:4, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:1, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:2, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:3, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:4, content:(„¿•D)]
+server:: waiting...
+server:: read message [size:4156, inum:0, content:(êO“•D)]
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+calling UDP write
+
+
+test deep PASSED
+ (create many deeply nested directories)
+
+**********************************************************************
+Summary:
+test build PASSED
+ (build project using make)
+
+test shutdown PASSED
+ (init server and client then call shutdown)
+
+test creat PASSED
+ (creat a file and check with lookup)
+
+test write PASSED
+ (write then read one block)
+
+test stat PASSED
+ (stat a regular file)
+
+test overwrite PASSED
+ (overwrite a block)
+
+test maxfile PASSED
+ (write largest possible file)
+
+test maxfile2 PASSED
+ (write more blocks than possible)
+
+test dir1 PASSED
+ (check root for dot entries)
+
+test dir2 PASSED
+ (create a new directory and check it)
+
+test baddir PASSED
+ (try to create a file with a file parent inode)
+
+test baddir2 PASSED
+ (try to lookup a file with a file parent inode)
+
+test unlink PASSED
+ (unlink a file)
+
+test unlink2 PASSED
+ (unlink a directory)
+
+test empty PASSED
+ (unlink a non-empty directory)
+
+test name PASSED
+ (name too long)
+
+test persist PASSED
+ (restart server after creating a file)
+
+test bigdir PASSED
+ (create a directory with 126 files)
+
+test deep PASSED
+ (create many deeply nested directories)
+
+Passed 19 of 19 tests.
+Overall 19 of 19
