@@ -40,7 +40,6 @@ super_t *s;
 
 void clear_bit (bitmap_t *bmap, int map_num) {
     int index = map_num / 32;
-    int num = bmap->bits[index];
     bmap->bits[index] = bmap->bits[index] & ~ (1 << (31-map_num));
 }
 
@@ -390,10 +389,10 @@ int main(int argc, char *argv[]) {
     s = (super_t *) image;
 
     inode_table = image + (s->inode_region_addr * UFS_BLOCK_SIZE);
-    inode_t *root_inode = inode_table;
+    // inode_t *root_inode = inode_table;
 
 
-    dir_ent_t *root_dir = image + (root_inode->direct[0] * UFS_BLOCK_SIZE);
+    // dir_ent_t *root_dir = image + (root_inode->direct[0] * UFS_BLOCK_SIZE);
 
     //Message 
     // message_t m;
